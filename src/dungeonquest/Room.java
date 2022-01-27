@@ -42,5 +42,22 @@ public class Room {
     public String deathState () {
         return roomDeathState;
     }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public String getRoomDescription() {
+        return roomDescription;
+    }
+
+    public String getRoomDoorNumber() {
+        return roomDoorNumber;
+    }
+
+    public String getRoomDoorDesc() {
+        return roomDoorDesc;
+    }
+    
     
 }

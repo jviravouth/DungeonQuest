@@ -7,7 +7,6 @@ import java.util.*;
  * @author jvira
  */
 public class DungeonQuest {
-
     public static void main(String[] args) {
         // Set up Dungeon Entrance room
         Room entrance = new Room("Dungeon Entrance", // Room Name
@@ -69,13 +68,50 @@ public class DungeonQuest {
         System.out.println("4. " + testRoom4.getRoomName() + " " + testRoom4.getRoomDoorDesc());
         
         String input = keyboard.nextLine();
-        MOVE:
-        if (input.equals("1")) {
-            System.out.println("You enter " + testRoom1.getRoomName());
-        } 
-        else {
-            System.out.println("That door does not exist!");
+        
+            if (input.equals("1")) {
+                System.out.println("You enter " + testRoom1.getRoomName());
+                playRoom1();
+            } 
+            else if (input.equals("2")) {
+                System.out.println("You enter " + testRoom2.getRoomName());
+            }
+            else if (input.equals("3")) {
+                System.out.println("You enter " + testRoom3.getRoomName());
+            }
+            else if (input.equals("4")) {
+                System.out.println("You enter " + testRoom4.getRoomName());
+            }
+            else {
+                System.out.println("That door does not exist!");
+                System.out.println("1. " + testRoom1.getRoomName() + " " + testRoom1.getRoomDoorDesc());
+                System.out.println("2. " + testRoom2.getRoomName() + " " + testRoom2.getRoomDoorDesc());
+                System.out.println("3. " + testRoom3.getRoomName() + " " + testRoom3.getRoomDoorDesc());
+                System.out.println("4. " + testRoom4.getRoomName() + " " + testRoom4.getRoomDoorDesc());
+            }
+            break;
         }
+    }
+    
+    public static void playRoom1() {
+        Scanner keyboard = new Scanner(System.in);
+        Item goldenKey = new Item("Golden Key", "A key shimmering in gold");
+        System.out.println("In front of you lays a golden key what do you do?");
+        System.out.println("1. Grab the key.");
+        System.out.println("2. Exit the room.");
+
+        String input = keyboard.nextLine();
+        if (input.equals("1")) {
+            System.out.println("You've grabbed the key!");
+            System.out.println("Would you like to examine the key?");
+            System.out.println("\t1. Yes\n\t2. No");
+            input = keyboard.nextLine();
+            if (input.equals("1")) {
+                goldenKey.getItemDesc();
+            }
+        }
+        else if (input.equals("2")) {
+            System.out.println("You leave the room.");
         }
     }
 }

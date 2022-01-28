@@ -15,6 +15,11 @@ public class Item {
     }
     
     public void getItem() {
-        System.out.println(itemDict.get(this.itemName));
+        System.out.println(itemDesc);
     }
+    
+    public void getItemDesc() {
+        System.out.println(itemDesc);
+    }
+
 }

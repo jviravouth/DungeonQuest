@@ -1,117 +1,210 @@
 package dungeonquest;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
+import javax.swing.*;
 
-/**
- *
- * @author jvira
- */
 public class DungeonQuest {
-    public static void main(String[] args) {
-        // Set up Dungeon Entrance room
-        Room entrance = new Room("Dungeon Entrance", // Room Name
-                          "This is the Entrance to the dungeon! You notice 4 doors ahead of you.", // Room Description
-                          "0", // Room Door Number
-                          "This is the door to the Fire Room", // Room Door Description
-                          "You awaken at the entrance to the dungeon."); // Death State 
     
-        // Set up TestRoom 1
-        Room testRoom1 = new Room("Test Room 1", // Test Room
-                            "This is a test room beyond the entrance of the dungeon.", // Room Desc
-                            "1", // Room Door Number
-                            "This is room number 1.", // Room Door Description
-                            "You died in room 1!"); // Death State
+    JFrame ui;
+    Container container;
+    JPanel startScreen, startScreenBG, startButtonPanel, gameText, choicesPanel, playerPanel;
+    JLabel startScreenTitle, startScreenBGLabel, playerInvLabel, playerInv;
+    JButton startButton, choice1, choice2, choice3, choice4;
+    JTextArea gameTextArea;
+    
+    startButtonHandler startHandler = new startButtonHandler();
+    choiceButtonHandler choiceHandler = new choiceButtonHandler();
+    
+    public static void main(String[] args) {
+        new DungeonQuest();
+    }
+    
+    public DungeonQuest() {
+        ui = new JFrame();
+        /*
+        ui.setSize(1280, 720);
+        ui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ui.getContentPane().setBackground(Color.BLACK);
+        ui.setLayout(null);
+        ui.setVisible(true);
+        container = ui.getContentPane();
+        */ 
         
-        // Set up TestRoom 2
-        Room testRoom2 = new Room("Test Room 2", // Test Room
-                            "This is a test room beyond the entrance of the dungeon.", // Room Desc
-                            "2", // Room Door Number
-                            "This is room number 2.", // Room Door Description
-                            "You died in room 2!"); // Death State
-        
-        // Set up TestRoom 3
-        Room testRoom3 = new Room("Test Room 3", // Test Room
-                            "This is a test room beyond the entrance of the dungeon.", // Room Desc
-                            "3", // Room Door Number
-                            "This is room number 3.", // Room Door Description
-                            "You died in room 3!"); // Death State
-        
-        // Set up TestRoom 4
-        Room testRoom4 = new Room("Test Room 4", // Test Room
-                            "This is a test room beyond the entrance of the dungeon.", // Room Desc
-                            "4", // Room Door Number
-                            "This is room number 4.", // Room Door Description
-                            "You died in room 4!"); // Death State
-        
-        
-        // Boolean value for game state
-        boolean running = true;
-        
-        /* Loop Label and while loop for most game functions.
-            THIS IS ENTIRELY A TEST, I HAVE NO IDEA HOW THIS WILL FUNCTION WITH JAVAFX
-            MAY NOT USE THIS CODE AT ALL -JV
+        /*
+        startScreenBG = new JPanel();
+        startScreenBG.setBounds(0,0,1280,720);
+        startScreenBG.setLayout(null);
+        startScreenBGLabel = new JLabel();
+        startScreenBGLabel.setBounds(0,0,1280,720);
+        ImageIcon startScreenIMG = new ImageIcon(getClass().getClassLoader().getResource("Picture1.png"));
+        startScreenBGLabel.setIcon(startScreenIMG);
         */
-        GAME:
-        while(running) {
-        System.out.println("**********************************");
-        System.out.println("Welcome to the dungeon Sir Wizard!");
-        System.out.println("**********************************");
+
+        startScreen = new JPanel();
+        startScreen.setBounds(350,175,600,200);
+        startScreen.setBackground(Color.BLACK);
+        startScreenTitle = new JLabel("Dungeon Quest");
+        startScreenTitle.setForeground(Color.WHITE);
+        startScreenTitle.setFont(startScreenTitle.getFont().deriveFont(40.0f));
         
-        Scanner keyboard = new Scanner(System.in);
+        startButtonPanel = new JPanel();
+        startButtonPanel.setBounds(500,475,300,50);
+        startButtonPanel.setOpaque(false);
         
-        System.out.println();
+        startButton = new JButton("Begin your Journey!");
+        startButton.setOpaque(false);
+        startButton.setContentAreaFilled(false);
+        startButton.setForeground(Color.WHITE);
+        startButton.setFont(startButton.getFont().deriveFont(25.0f));
+        startButton.setFocusPainted(false);
+        startButton.addActionListener(startHandler);
         
-        System.out.println("You enter the dungeon yadadadada pick a room!");
-        System.out.println("1. " + testRoom1.getRoomName() + " " + testRoom1.getRoomDoorDesc());
-        System.out.println("2. " + testRoom2.getRoomName() + " " + testRoom2.getRoomDoorDesc());
-        System.out.println("3. " + testRoom3.getRoomName() + " " + testRoom3.getRoomDoorDesc());
-        System.out.println("4. " + testRoom4.getRoomName() + " " + testRoom4.getRoomDoorDesc());
+        startScreen.add(startScreenTitle);
+        startButtonPanel.add(startButton);
+        //startScreenBG.add(startScreenBGLabel);
+
+        container = ui.getContentPane();
         
-        String input = keyboard.nextLine();
+        container.add(startScreen);
+        container.add(startButtonPanel);
+        //container.add(startScreenBG);
         
-            if (input.equals("1")) {
-                System.out.println("You enter " + testRoom1.getRoomName());
-                playRoom1();
-            } 
-            else if (input.equals("2")) {
-                System.out.println("You enter " + testRoom2.getRoomName());
-            }
-            else if (input.equals("3")) {
-                System.out.println("You enter " + testRoom3.getRoomName());
-            }
-            else if (input.equals("4")) {
-                System.out.println("You enter " + testRoom4.getRoomName());
-            }
-            else {
-                System.out.println("That door does not exist!");
-                System.out.println("1. " + testRoom1.getRoomName() + " " + testRoom1.getRoomDoorDesc());
-                System.out.println("2. " + testRoom2.getRoomName() + " " + testRoom2.getRoomDoorDesc());
-                System.out.println("3. " + testRoom3.getRoomName() + " " + testRoom3.getRoomDoorDesc());
-                System.out.println("4. " + testRoom4.getRoomName() + " " + testRoom4.getRoomDoorDesc());
-            }
-            break;
+        ui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ui.setSize(1280,720);
+        ui.getContentPane().setBackground(Color.BLACK);
+        ui.setLayout(null);
+        ui.setResizable(true);
+        ui.setVisible(true);
+    }
+    
+    public void gameUI() {
+        
+        //startScreen.setVisible(false);
+        //startButtonPanel.setVisible(false);
+        
+        gameText = new JPanel();
+        gameText.setBounds(350, 175, 600, 250);
+        gameText.setBackground(Color.BLACK);
+        gameText.setForeground(Color.BLACK);
+      
+        container.add(gameText);
+        
+        gameTextArea = new JTextArea("You've entered the Dungeon! There are four rooms\n"
+                + "ahead of you.");
+        gameTextArea.setBounds(350,175,600,250);
+        gameTextArea.setBackground(Color.BLACK);
+        gameTextArea.setForeground(Color.WHITE);
+        gameTextArea.setFont(gameTextArea.getFont().deriveFont(25.0f));
+        gameTextArea.setLineWrap(true);
+        gameText.add(gameTextArea);
+        
+        choicesPanel = new JPanel();
+        choicesPanel.setLayout(new GridLayout(4,1));
+        choicesPanel.setBounds(520,425,250,175);
+        choicesPanel.setOpaque(false);
+        container.add(choicesPanel);
+        
+        choice1 = new JButton("Enter Door 1");
+        choice1.setOpaque(false);
+        choice1.setContentAreaFilled(false);
+        choice1.setForeground(Color.WHITE);
+        choice1.setFocusPainted(false);
+        choice1.setFont(choice1.getFont().deriveFont(25.0f));
+        choice1.addActionListener(choiceHandler);
+        choice1.setActionCommand("choice1");
+        
+        choice2 = new JButton("Enter Door 2");
+        choice2.setOpaque(false);
+        choice2.setContentAreaFilled(false);
+        choice2.setForeground(Color.WHITE);
+        choice2.setFocusPainted(false);
+        choice2.setFont(choice1.getFont().deriveFont(25.0f));
+        choice2.addActionListener(choiceHandler);
+        choice2.setActionCommand("choice1");
+        
+        choice3 = new JButton("Enter Door 3");
+        choice3.setOpaque(false);
+        choice3.setContentAreaFilled(false);
+        choice3.setForeground(Color.WHITE);
+        choice3.setFocusPainted(false);
+        choice3.setFont(choice1.getFont().deriveFont(25.0f));
+        choice3.addActionListener(choiceHandler);
+        choice3.setActionCommand("choice1");
+        
+        choice4 = new JButton("Enter Door 4");
+        choice4.setOpaque(false);
+        choice4.setContentAreaFilled(false);
+        choice4.setForeground(Color.WHITE);
+        choice4.setFocusPainted(false);
+        choice4.setFont(choice1.getFont().deriveFont(25.0f));
+        choice4.addActionListener(choiceHandler);
+        choice4.setActionCommand("choice1");
+        
+        playerPanel = new JPanel();
+        playerPanel.setBounds(100,30,1050,50);
+        playerPanel.setBackground(Color.BLACK);
+        playerPanel.setLayout(new GridLayout(1,4));
+        container.add(playerPanel);
+        
+        playerInvLabel = new JLabel("Inventory:");
+        playerInvLabel.setFont(playerInvLabel.getFont().deriveFont(25.0f));
+        playerInvLabel.setForeground(Color.WHITE);
+        playerPanel.add(playerInvLabel);
+        playerInv = new JLabel();
+        playerInv.setFont(playerInv.getFont().deriveFont(25.0f));
+        playerInv.setForeground(Color.WHITE);
+        playerPanel.add(playerInv);
+        
+        choicesPanel.add(choice1);
+        choicesPanel.add(choice2);
+        choicesPanel.add(choice3);
+        choicesPanel.add(choice4);
+        
+        ui.repaint();
+        startScreen.setVisible(false);
+        startButtonPanel.setVisible(false);
+    }
+    
+    public void door1() {
+        gameTextArea.setText("You've entered the first door!\nIn front of you lies a golden"
+                + " key!");
+        choice1.setText("Grab the Key");
+        choice2.setText("Examine the key");
+        choice3.setText("Wait");
+        choice4.setText("Exit the room");
+    }
+    public class startButtonHandler implements ActionListener{
+        
+        public void actionPerformed(ActionEvent event) {
+            gameUI();
         }
     }
     
-    public static void playRoom1() {
-        Scanner keyboard = new Scanner(System.in);
-        Item goldenKey = new Item("Golden Key", "A key shimmering in gold");
-        System.out.println("In front of you lays a golden key what do you do?");
-        System.out.println("1. Grab the key.");
-        System.out.println("2. Exit the room.");
-
-        String input = keyboard.nextLine();
-        if (input.equals("1")) {
-            System.out.println("You've grabbed the key!");
-            System.out.println("Would you like to examine the key?");
-            System.out.println("\t1. Yes\n\t2. No");
-            input = keyboard.nextLine();
-            if (input.equals("1")) {
-                goldenKey.getItemDesc();
+    public class choiceButtonHandler implements ActionListener{
+        
+        public void actionPerformed(ActionEvent event) {
+            String choiceMade = event.getActionCommand();
+            
+            switch(choiceMade){
+                case "choice1":
+                    door1();
+                    break;
+                case "choice2":
+                    door2();
+                    break;
+                case "choice3":
+                    door3();
+                    break;
+                case "choice4":
+                    door4();
+                    break;
             }
-        }
-        else if (input.equals("2")) {
-            System.out.println("You leave the room.");
         }
     }
 }

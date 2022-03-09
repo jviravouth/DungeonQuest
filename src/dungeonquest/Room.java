@@ -39,24 +39,29 @@ public class Room {
     }
     
     // Method to return roomDeathState description
-    public String deathState () {
-        return roomDeathState;
+    public String getDeathState () {
+        String str = roomDeathState;
+        return str;
     }
 
     public String getRoomName() {
-        return roomName;
+        String str = roomName;
+        return str;
     }
 
     public String getRoomDescription() {
-        return roomDescription;
+        String str = roomDescription;
+        return str;
     }
 
     public String getRoomDoorNumber() {
-        return roomDoorNumber;
+        String str = roomDoorNumber;
+        return str;
     }
 
     public String getRoomDoorDesc() {
-        return roomDoorDesc;
+        String str = roomDoorDesc;
+        return str;
     }
     
     

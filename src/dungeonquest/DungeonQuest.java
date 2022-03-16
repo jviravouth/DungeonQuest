@@ -14,15 +14,17 @@ public class DungeonQuest {
     JFrame ui;
     Container container;
     JPanel startScreen, startScreenBG, startButtonPanel, gameText, choicesPanel, playerPanel;
-    JLabel startScreenTitle, startScreenBGLabel, playerInvLabel, playerInv;
+    JLabel startScreenTitle, startScreenBGLabel, playerInvLabel, playerInv, playerTurnLabel;
     JButton startButton, choice1, choice2, choice3, choice4;
     JTextArea gameTextArea;
+    String position;
+    int playerTurn = 0;
     
     startButtonHandler startHandler = new startButtonHandler();
     choiceButtonHandler choiceHandler = new choiceButtonHandler();
     
     public static void main(String[] args) {
-        new DungeonQuest();
+        DungeonQuest game = new DungeonQuest();
     }
     
     public DungeonQuest() {
@@ -95,14 +97,16 @@ public class DungeonQuest {
       
         container.add(gameText);
         
-        gameTextArea = new JTextArea("You've entered the Dungeon! There are four rooms\n"
-                + "ahead of you.");
+        gameTextArea = new JTextArea("""
+                                     You've entered the Dungeon! There are four rooms
+                                     ahead of you.""");
         gameTextArea.setBounds(350,175,600,250);
         gameTextArea.setBackground(Color.BLACK);
         gameTextArea.setForeground(Color.WHITE);
         gameTextArea.setFont(gameTextArea.getFont().deriveFont(25.0f));
         gameTextArea.setLineWrap(true);
         gameText.add(gameTextArea);
+        position = "entrance";
         
         choicesPanel = new JPanel();
         choicesPanel.setLayout(new GridLayout(4,1));
@@ -126,7 +130,7 @@ public class DungeonQuest {
         choice2.setFocusPainted(false);
         choice2.setFont(choice1.getFont().deriveFont(25.0f));
         choice2.addActionListener(choiceHandler);
-        choice2.setActionCommand("choice1");
+        choice2.setActionCommand("choice2");
         
         choice3 = new JButton("Enter Door 3");
         choice3.setOpaque(false);
@@ -135,7 +139,7 @@ public class DungeonQuest {
         choice3.setFocusPainted(false);
         choice3.setFont(choice1.getFont().deriveFont(25.0f));
         choice3.addActionListener(choiceHandler);
-        choice3.setActionCommand("choice1");
+        choice3.setActionCommand("choice3");
         
         choice4 = new JButton("Enter Door 4");
         choice4.setOpaque(false);
@@ -144,7 +148,7 @@ public class DungeonQuest {
         choice4.setFocusPainted(false);
         choice4.setFont(choice1.getFont().deriveFont(25.0f));
         choice4.addActionListener(choiceHandler);
-        choice4.setActionCommand("choice1");
+        choice4.setActionCommand("choice4");
         
         playerPanel = new JPanel();
         playerPanel.setBounds(100,30,1050,50);
@@ -161,6 +165,11 @@ public class DungeonQuest {
         playerInv.setForeground(Color.WHITE);
         playerPanel.add(playerInv);
         
+        playerTurnLabel = new JLabel("Turn #: " + playerTurn);
+        playerTurnLabel.setFont(playerTurnLabel.getFont().deriveFont(25.0f));
+        playerTurnLabel.setForeground(Color.WHITE);
+        playerPanel.add(playerTurnLabel);
+        
         choicesPanel.add(choice1);
         choicesPanel.add(choice2);
         choicesPanel.add(choice3);
@@ -172,15 +181,54 @@ public class DungeonQuest {
     }
     
     public void door1() {
-        gameTextArea.setText("You've entered the first door!\nIn front of you lies a golden"
-                + " key!");
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: " + playerTurn);
+        position = "door1";
+        gameTextArea.setText("""
+                             You've entered the first door!
+                             In front of you lies a golden key!""");
         choice1.setText("Grab the Key");
         choice2.setText("Examine the key");
         choice3.setText("Wait");
         choice4.setText("Exit the room");
+         
+    }
+    
+    public void grabGoldenKey() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: " + playerTurn);
+        position = "grabGoldenKey";
+        gameTextArea.setText("You've grabbed the golden key!");
+        choice1.setText("Return");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    
+    public void examineGoldenKey() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: " + playerTurn);
+        position = "examineGoldenKey";
+        gameTextArea.setText("A key shimmering in gold.");
+        choice1.setText("Return");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    
+    public void waitTurn() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: " + playerTurn);
+        position = "waitTurn";
+        gameTextArea.setText("You pause for a moment to catch your breath.");
+        choice1.setText("Return");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
     }
     public class startButtonHandler implements ActionListener{
         
+        @Override
         public void actionPerformed(ActionEvent event) {
             gameUI();
         }
@@ -188,22 +236,41 @@ public class DungeonQuest {
     
     public class choiceButtonHandler implements ActionListener{
         
+        @Override
         public void actionPerformed(ActionEvent event) {
+            
             String choiceMade = event.getActionCommand();
             
-            switch(choiceMade){
-                case "choice1":
-                    door1();
-                    break;
-                case "choice2":
-                    door2();
-                    break;
-                case "choice3":
-                    door3();
-                    break;
-                case "choice4":
-                    door4();
-                    break;
+            switch(position){
+            case "entrance":
+                switch(choiceMade){
+                    case "choice1": door1(); break;
+                    case "choice2": break;
+                    case "choice3": break;
+                    case "choice4": break;
+                }
+                break;
+            case "door1":
+                switch(choiceMade){
+                    case "choice1": grabGoldenKey(); break;
+                    case "choice2": examineGoldenKey(); break;
+                    case "choice3": waitTurn(); break;
+                }
+                break;
+            case "grabGoldenKey":
+                switch(choiceMade){
+                    case "choice1": door1(); break;
+                }
+                break;
+            case "examineGoldenKey":
+                switch(choiceMade){
+                    case "choice1": door1(); break;
+                }
+                break;
+            case "waitTurn":
+                switch(choiceMade){
+                    case "choice1": door1(); break;
+                }
             }
         }
     }

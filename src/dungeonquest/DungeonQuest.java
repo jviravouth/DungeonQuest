@@ -18,6 +18,7 @@ public class DungeonQuest {
     JButton startButton, choice1, choice2, choice3, choice4;
     JTextArea gameTextArea;
     String position;
+    boolean flagGoldenKey = false;
     int playerTurn = 0;
     
     startButtonHandler startHandler = new startButtonHandler();
@@ -97,16 +98,17 @@ public class DungeonQuest {
       
         container.add(gameText);
         
-        gameTextArea = new JTextArea("""
+        /*gameTextArea = new JTextArea("""
                                      You've entered the Dungeon! There are four rooms
-                                     ahead of you.""");
+                                     ahead of you.""");*/
+        gameTextArea = new JTextArea();
         gameTextArea.setBounds(350,175,600,250);
         gameTextArea.setBackground(Color.BLACK);
         gameTextArea.setForeground(Color.WHITE);
         gameTextArea.setFont(gameTextArea.getFont().deriveFont(25.0f));
         gameTextArea.setLineWrap(true);
         gameText.add(gameTextArea);
-        position = "entrance";
+        //position = "entrance";
         
         choicesPanel = new JPanel();
         choicesPanel.setLayout(new GridLayout(4,1));
@@ -114,7 +116,8 @@ public class DungeonQuest {
         choicesPanel.setOpaque(false);
         container.add(choicesPanel);
         
-        choice1 = new JButton("Enter Door 1");
+        //choice1 = new JButton("Enter Door 1");
+        choice1 = new JButton();
         choice1.setOpaque(false);
         choice1.setContentAreaFilled(false);
         choice1.setForeground(Color.WHITE);
@@ -123,7 +126,8 @@ public class DungeonQuest {
         choice1.addActionListener(choiceHandler);
         choice1.setActionCommand("choice1");
         
-        choice2 = new JButton("Enter Door 2");
+        //choice2 = new JButton("Enter Door 2");
+        choice2 = new JButton();
         choice2.setOpaque(false);
         choice2.setContentAreaFilled(false);
         choice2.setForeground(Color.WHITE);
@@ -132,7 +136,8 @@ public class DungeonQuest {
         choice2.addActionListener(choiceHandler);
         choice2.setActionCommand("choice2");
         
-        choice3 = new JButton("Enter Door 3");
+        //choice3 = new JButton("Enter Door 3");
+        choice3 = new JButton();
         choice3.setOpaque(false);
         choice3.setContentAreaFilled(false);
         choice3.setForeground(Color.WHITE);
@@ -141,7 +146,8 @@ public class DungeonQuest {
         choice3.addActionListener(choiceHandler);
         choice3.setActionCommand("choice3");
         
-        choice4 = new JButton("Enter Door 4");
+        //choice4 = new JButton("Enter Door 4");
+        choice4 = new JButton();
         choice4.setOpaque(false);
         choice4.setContentAreaFilled(false);
         choice4.setForeground(Color.WHITE);
@@ -178,16 +184,36 @@ public class DungeonQuest {
         ui.repaint();
         startScreen.setVisible(false);
         startButtonPanel.setVisible(false);
+        
+        entrance();
+    }
+    
+    public void entrance() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: " + playerTurn);
+        position = "entrance";
+        gameTextArea.setText("You've entered the Dungeon! There are four rooms \nahead of you.");
+        choice1.setText("Enter Door 1");
+        choice2.setText("Enter Door 2");
+        choice3.setText("Enter Door 3");
+        choice4.setText("Enter Door 4");
     }
     
     public void door1() {
         playerTurn++;
         playerTurnLabel.setText("Turn #: " + playerTurn);
         position = "door1";
-        gameTextArea.setText("""
+        if (flagGoldenKey == false) {
+            gameTextArea.setText("""
                              You've entered the first door!
-                             In front of you lies a golden key!""");
-        choice1.setText("Grab the Key");
+                             In front of you lies a golden key!"""); 
+            choice1.setText("Grab the key");
+        } else {
+            gameTextArea.setText("""
+                                 You've entered the first door!""");
+            choice1.setText("Key Obtained!");
+        }
+        //choice1.setText("Grab the Key");
         choice2.setText("Examine the key");
         choice3.setText("Wait");
         choice4.setText("Exit the room");
@@ -199,6 +225,8 @@ public class DungeonQuest {
         playerTurnLabel.setText("Turn #: " + playerTurn);
         position = "grabGoldenKey";
         gameTextArea.setText("You've grabbed the golden key!");
+        flagGoldenKey = true;
+        playerInv.setText("Golden Key");
         choice1.setText("Return");
         choice2.setText("");
         choice3.setText("");
@@ -226,6 +254,7 @@ public class DungeonQuest {
         choice3.setText("");
         choice4.setText("");
     }
+    
     public class startButtonHandler implements ActionListener{
         
         @Override
@@ -255,6 +284,7 @@ public class DungeonQuest {
                     case "choice1": grabGoldenKey(); break;
                     case "choice2": examineGoldenKey(); break;
                     case "choice3": waitTurn(); break;
+                    case "choice4": entrance(); break;
                 }
                 break;
             case "grabGoldenKey":

@@ -278,6 +278,8 @@ public class DungeonQuest {
     }
     
     public void examineLibrary(){
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: " + playerTurn);
         position = "examineLibrary";
         if (libraryStoveOn == true) {
                 gameTextArea.setText("The room is a library with a huge safe in the middle" +
@@ -299,6 +301,8 @@ public class DungeonQuest {
     }
     
     public void libraryListen() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: " + playerTurn);
         position = "libraryListen";
         if (libraryStoveOn == true) {
             gameTextArea.setText("You hear a loud whistling from the kettle echo throughout " +
@@ -323,6 +327,8 @@ public class DungeonQuest {
     }
     
     public void libraryTrySafe() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: " + playerTurn);
         position = "libraryTrySafe";
         if (libraryCombinationKnown == false) {
             gameTextArea.setText("You enter a random code and it does nothing.");
@@ -347,6 +353,8 @@ public class DungeonQuest {
     }
     
     public void libraryTurnOffStove() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: " + playerTurn);
         position = "libraryTurnOffStove";
         if (libraryStoveOn == true) {
             gameTextArea.setText("You turn off the stove. The heat of the stove stops burning " +
@@ -371,6 +379,8 @@ public class DungeonQuest {
     public void examineDoor2(){
         // flavor text for FEED room
         // choices enter the room, return
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: " + playerTurn);
         position = "examineDoor2";
         gameTextArea.setText("A door made of iron covered in scratches");
         choice1.setText("Enter the room");

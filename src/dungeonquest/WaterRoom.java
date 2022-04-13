@@ -13,7 +13,7 @@ public class WaterRoom
     static Room waterRoom = new Room("Waterways", "There is a barely man sized hole in "
             + "the opposite wall with water at its base. There is also a plaque "
             + "adjacent to the hole.", "A wooden door",
-            "The door to this room is warped and covered in tar to keep in moisture.",
+            "The door to this room is warped and covered in tar to keep in moisture." +
             "As the water slowly rises you start to "
             + "lose space for breathing and everything goes black.");
     

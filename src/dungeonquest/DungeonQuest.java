@@ -1540,20 +1540,36 @@ public class DungeonQuest {
                 }
                 break;
             case "door4Drown":
-                if (turnTracker < 8) {
+                if (turnTracker < 1) {
                     switch(choiceMade){
-                    case "choice1": readDiary(); break;
-                    case "choice2": flipSwitchDrown(); break;
-                    case "choice3": portholeDrown(); break;
-                    case "choice4": waitTurn(position); break;
-                }
-                break;
+                        case "choice1": readDiary(); break;
+                        case "choice2": flipSwitchDrown(); break;
+                        case "choice3": portholeDrown(); break;
+                        case "choice4": waitTurn(position); break;
+                    }
+                    break;
+                } else if (turnTracker <= 5) {
+                    switch(choiceMade){
+                        case "choice1": readDiary(); break;
+                        case "choice2": flipSwitchDrown(); break;
+                        case "choice3": portholeDrown(); break;
+                        case "choice4": waitTurn(position); break;
+                    }
+                    break;
+                } else if (turnTracker >= 7){
+                    switch(choiceMade){
+                        case "choice1": readDiary(); break;
+                        case "choice2": flipSwitchDrown(); break;
+                        case "choice3": portholeDrown(); break;
+                        case "choice4": waitTurn(position); break;
+                    }
+                    break;
                 } else {
                     switch(choiceMade){
-                    case "choice1": deathReset1(); break;
+                        case "choice1": deathReset1(); break;
                     }
+                    break;
                 }
-                break;
             case "readDiary":
                 switch(choiceMade){
                     case "choice1": door4Drown(); break;

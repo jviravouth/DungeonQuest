@@ -58,6 +58,7 @@ public class DungeonQuest {
     }
     
     public DungeonQuest() {
+        System.out.println("hello.");
         ui = new JFrame();
         /*
         ui.setSize(1280, 720);
@@ -334,7 +335,7 @@ public class DungeonQuest {
             gameTextArea.setText("You enter a random code and it does nothing.");
             choice1.setText("Listen to the room");
             choice2.setText("Return");
-            choice3.setText("Turn off the stove");
+            choice3.setText("Turn stove off");
             choice4.setText("Wait");
         } else {
             gameTextArea.setText("You enter in the sequence you heard form the clock!" +
@@ -1229,6 +1230,7 @@ public class DungeonQuest {
             choice4.setText("");
         }
     }
+    
     public void door7CarsonsPuzzle(){
         
     }
@@ -1307,7 +1309,7 @@ public class DungeonQuest {
         
         @Override
         public void actionPerformed(ActionEvent event) {
-            gameUI();
+            //gameUI();
         }
     }
     
@@ -1556,7 +1558,7 @@ public class DungeonQuest {
                         case "choice4": waitTurn(position); break;
                     }
                     break;
-                } else if (turnTracker >= 7){
+                } else if (turnTracker >= 7) {
                     switch(choiceMade){
                         case "choice1": readDiary(); break;
                         case "choice2": flipSwitchDrown(); break;

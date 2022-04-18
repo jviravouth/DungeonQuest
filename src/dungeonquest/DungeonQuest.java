@@ -47,9 +47,33 @@ public class DungeonQuest {
     boolean flyRight = false;
     boolean flyUp = false;
     boolean windRoomComplete = false;
+    boolean haveFryPan = false;
+    boolean haveWax = false;
+    boolean haveCloth = false;
+    boolean panStove = false;
+    boolean waxStove = false;
+    boolean clothStove = false;
+    boolean heatRoomComplete = false;
     int playerTurn = 0;
     int turnTracker = 0;
+    /*
+    boolean playerWon = false;
     
+    JButton a1, a2, a3, b1, b2, b3, c1, c2, c3;
+    //ImageIcon a1x = new ImageIcon(getClass().getClassLoader().getResource("X.png"));
+    //ImageIcon a1o = new ImageIcon(getClass().getClassLoader().getResource("O.png"));
+    //ImageIcon a1x, a2x, a3x, b1x, b2x, b3x, c1x, c2x, c3x = new ImageIcon(getClass().getResource("X.png"));
+    //ImageIcon a1o, a2o, a3o, b1o, b2o, b3o, c1o, c2o, c3o = new ImageIcon(getClass().getResource("O.png"));
+    int[][] tic = new int[3][3];
+    int actionPerformed = 0;
+    int gameStatus = 0;
+    int row, column = 0;
+    Scanner scan = new Scanner(System.in);
+    Random rand = new Random();
+    //Container tttContainer;
+    
+    tttHandler tttgame = new tttHandler();
+    */
     startButtonHandler startHandler = new startButtonHandler();
     choiceButtonHandler choiceHandler = new choiceButtonHandler();
     
@@ -58,7 +82,6 @@ public class DungeonQuest {
     }
     
     public DungeonQuest() {
-        System.out.println("hello.");
         ui = new JFrame();
         /*
         ui.setSize(1280, 720);
@@ -218,6 +241,332 @@ public class DungeonQuest {
         entrance();
     }
     
+    /*
+    public void TicTacToe(){
+            System.out.println("Hello");
+            
+            JFrame TTTFrame = new JFrame();
+            tttContainer = TTTFrame.getContentPane();
+            
+            JPanel ticTacToeUI = new JPanel();
+            ticTacToeUI.setLayout(new GridLayout(3, 3));
+            ticTacToeUI.setBounds(0,0,340,340); 
+            tttContainer.add(ticTacToeUI);
+            
+            JLabel ticTacToeImages = new JLabel();
+            ticTacToeImages.setLayout(new GridLayout(3,3));
+            ticTacToeImages.setBounds(0,0,340,340);
+            //a1.setForeground(Color.red);
+            
+            a1 = new JButton();
+            a1.addActionListener(tttgame);
+            a1.setActionCommand("A1");
+            
+            a2 = new JButton();
+            a2.addActionListener(tttgame);
+            a2.setActionCommand("A2");
+            
+            a3 = new JButton();
+            a3.addActionListener(tttgame);
+            a3.setActionCommand("A3");
+            
+            b1 = new JButton();
+            b1.addActionListener(tttgame);
+            b1.setActionCommand("B1");
+            
+            b2 = new JButton();
+            b2.addActionListener(tttgame);
+            b2.setActionCommand("B2");
+            
+            b3 = new JButton();
+            b3.addActionListener(tttgame);
+            b3.setActionCommand("B3");
+            
+            c1 = new JButton();
+            c1.addActionListener(tttgame);
+            c1.setActionCommand("C1");
+            
+            c2 = new JButton();
+            c2.addActionListener(tttgame);
+            c2.setActionCommand("C2");
+            
+            c3 = new JButton();
+            c3.addActionListener(tttgame);
+            c3.setActionCommand("C3");
+            //tttContainer.add(ticTacToeImages);
+            
+            /*
+            JButton a2 = new JButton();
+            JButton a3 = new JButton();
+            JButton b1 = new JButton();
+            JButton b2 = new JButton();
+            JButton b3 = new JButton();
+            JButton c1 = new JButton();
+            JButton c2 = new JButton();
+            JButton c3 = new JButton();
+
+            ticTacToeUI.add(a1);
+            ticTacToeUI.add(a2);
+            ticTacToeUI.add(a3);
+            ticTacToeUI.add(b1);
+            ticTacToeUI.add(b2);
+            ticTacToeUI.add(b3);
+            ticTacToeUI.add(c1);
+            ticTacToeUI.add(c2);
+            ticTacToeUI.add(c3);
+            
+            TTTFrame.setSize(340,340);
+            TTTFrame.setVisible(true);
+            TTTFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            
+            /*boolean playerWon = false;
+            //Initilize frame
+            JFrame TTTFrame = new JFrame();
+            JPanel ticTacToeUI = new JPanel();
+            TTTFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            
+            TTTFrame.setSize(340,340);
+            ticTacToeUI.setSize(340, 340);
+            ticTacToeUI.setBackground(Color.YELLOW);
+            ticTacToeUI.setLayout(new GridLayout(3, 3, 10, 10));
+            
+            tttContainer = TTTFrame.getContentPane();
+            
+            
+            /*
+            //button initlize and link to action listner
+            ticTacToeUI.add(a1);
+            a1.addActionListener(tttgame);
+            a1.setActionCommand("A1");
+            a1.setOpaque(false);
+            a1.setBackground(Color.BLACK);
+            
+            ticTacToeUI.add(a2);
+            a2.addActionListener(tttgame);
+            a2.setActionCommand("A2");
+            ticTacToeUI.add(a3);
+            a3.addActionListener(tttgame);
+            a3.setActionCommand("A3");
+
+            ticTacToeUI.add(b1);
+            b1.addActionListener(tttgame);
+            b1.setActionCommand("B1");
+            ticTacToeUI.add(b2);
+            b2.addActionListener(tttgame);
+            b2.setActionCommand("B2");
+            ticTacToeUI.add(b3);
+            b3.addActionListener(tttgame);
+            b3.setActionCommand("B3");
+
+            ticTacToeUI.add(c1);
+            c1.addActionListener(tttgame);
+            c1.setActionCommand("C1");
+            ticTacToeUI.add(c2);
+            c2.addActionListener(tttgame);
+            c2.setActionCommand("C2");
+            ticTacToeUI.add(c3);
+            c3.addActionListener(tttgame);
+            c3.setActionCommand("C3");
+
+            TTTFrame.repaint();
+            
+            /*
+            TTTFrame.add(ticTacToeUI);
+            ticTacToeUI.setVisible(true);
+            TTTFrame.setVisible(true);
+
+            
+            //resetBoard();
+            
+            while(playerWon == false){
+                
+                while(actionPerformed < 10){
+                    TTTFrame.add(ticTacToeUI);
+                    checkBoard();
+                    TTTFrame.repaint();
+                }
+
+                resetBoard();
+                actionPerformed = 0;
+            }
+}
+
+    public int checkBoard(){
+            
+            int row1sum = tic[0][0] + tic[0][1] + tic[0][2];
+            int row2sum = tic[1][0] + tic[1][1] + tic[1][2];
+            int row3sum = tic[2][0] + tic[2][1] + tic[2][2];
+        
+            int col1sum = tic[0][0] + tic[1][0] + tic[2][0];
+            int col2sum = tic[0][1] + tic[1][1] + tic[2][1];
+            int col3sum = tic[0][2] + tic[1][2] + tic[2][2];
+        
+            int dig1sum = tic[0][0] + tic[1][1] + tic[2][2];
+            int dig2sum = tic[0][2] + tic[1][1] + tic[2][0];
+        
+            if(row1sum == -3 || row2sum == -3 || row3sum == -3 || col1sum == -3 || col2sum == -3 || col3sum == -3 || dig1sum == -3 || dig2sum == -3){
+                return gameStatus = 1;
+            } else if(row1sum == 3 || row2sum == 3 || row3sum == 3 || col1sum == 3 || col2sum == 3 || col3sum == 3 || dig1sum == 3 || dig2sum == 3){
+                playerWon = true;
+                return gameStatus = 2;
+            } else {
+                return gameStatus = 0;
+            }
+    }
+    
+     public void resetBoard(){
+        a1.setIcon(null);
+        a2.setIcon(null);
+        a3.setIcon(null);
+        b1.setIcon(null);
+        b2.setIcon(null);
+        b3.setIcon(null);
+        c1.setIcon(null);
+        c2.setIcon(null);
+        c3.setIcon(null);
+            /*
+            a1x.setVisible(false);
+            a1o.setVisible(false);
+            a2x.setVisible(false);
+            a2o.setVisible(false);
+            a3x.setVisible(false);
+            a3o.setVisible(false);
+
+            b1x.setVisible(false);
+            b1o.setVisible(false);
+            b2x.setVisible(false);
+            b2o.setVisible(false);
+            b3x.setVisible(false);
+            b3o.setVisible(false);
+
+            c1x.setVisible(false);
+            c1o.setVisible(false);
+            c2x.setVisible(false);
+            c2o.setVisible(false);
+            c3x.setVisible(false);
+            c3o.setVisible(false);
+    }
+ 
+     
+    public class tttHandler implements ActionListener{
+        
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            String choiceMadettt = event.getActionCommand();
+            
+            switch(choiceMadettt){
+                case "A1":
+                    a1.setIcon(a1x);
+                    a1.setEnabled(false);
+                    tic[0][0] = 1;
+                    actionPerformed++;
+                    break;
+                case "A2":
+                    a2.setIcon(a1x);
+                    a2.setEnabled(false);
+                    //a2x.setVisible(true);
+                    tic[0][1] = 1;
+                    actionPerformed++;
+                    break;
+                case "A3":
+                    a3.setIcon(a1x);
+                    a3.setEnabled(false);
+                    //a3x.setVisible(true);
+                    tic[0][2] = 1;
+                    actionPerformed++;
+                    break;
+                case "B1":
+                    b1.setIcon(a1x);
+                    b1.setEnabled(false);
+                    //b1x.setVisible(true);
+                    tic[1][0] = 1;
+                    actionPerformed++;
+                    break;
+                case "B2":
+                    b2.setIcon(a1x);
+                    b2.setEnabled(false);
+                    //b2x.setVisible(true);
+                    tic[1][1] = 1;
+                    actionPerformed++;
+                    break;
+                case "B3":
+                    b3.setIcon(a1x);
+                    b3.setEnabled(false);
+                    //b3x.setVisible(true);
+                    tic[1][2] = 1;
+                    actionPerformed++;
+                    break;
+                case "C1":
+                    c1.setIcon(a1x);
+                    c1.setEnabled(false);
+                    //c1x.setVisible(true);
+                    tic[2][0] = 1;
+                    actionPerformed++;
+                    break;
+                case "C2":
+                    c2.setIcon(a1x);
+                    c2.setEnabled(false);
+                    //c2x.setVisible(true);
+                    tic[2][1] = 1;
+                    actionPerformed++;
+                    break;
+                case "C3":
+                    c3.setIcon(a1x);
+                    c3.setEnabled(false);
+                    //c3x.setVisible(true);
+                    tic[2][2] = 1;
+                    actionPerformed++;
+                    break;
+            }
+            //computer turn
+            boolean fill = false;
+                while(fill == false && actionPerformed != 9){
+                    row = rand.nextInt(3);
+                    column = rand.nextInt(3);
+                    
+                    if(tic[row][column] == 1 || tic[row][column] == -1){
+                        fill = false; 
+                    } else {
+                        fill = true;
+                        tic[row][column] = -1;
+                        actionPerformed++;
+                    } 
+                }
+                
+                
+                if (row == 0 && column == 0 && actionPerformed != 9){
+                    a1.setIcon(a1o);
+                    //a1x.setVisible(true);
+                } else if (row == 0 && column == 1 && actionPerformed != 9){
+                    a2.setIcon(a1o);
+                    //a2x.setVisible(true);
+                } else if (row == 0 && column == 2 && actionPerformed != 9){
+                    a3.setIcon(a1o);
+                    //a3x.setVisible(true);
+                } else if (row == 1 && column == 0 && actionPerformed != 9){
+                    b1.setIcon(a1o);
+                    //b1x.setVisible(true);
+                }  else if(row == 1 && column == 1 && actionPerformed != 9){
+                    b2.setIcon(a1o);
+                    //b2x.setVisible(true);
+                } else if (row == 1 && column == 2 && actionPerformed != 9){
+                    b3.setIcon(a1o);
+                    //b3x.setVisible(true);
+                } else if (row == 2 && column == 0 && actionPerformed != 9){
+                    c1.setIcon(a1o);
+                    //c1x.setVisible(true);
+                } else if (row == 2 && column == 1 && actionPerformed != 9){
+                    c2.setIcon(a1o);
+                    //c2x.setVisible(true);
+                } else if (row == 2 && column == 2 && actionPerformed != 9){
+                    c3.setIcon(a1o);
+                    //c3x.setVisible(true);
+                }
+                
+            
+        }
+    } 
+*/
     public void entrance() {
         playerTurn++;
         playerTurnLabel.setText("Turn #: " + playerTurn);
@@ -819,6 +1168,7 @@ public class DungeonQuest {
         playerTurn++;
         playerTurnLabel.setText("Turn #: " + playerTurn);
         position = "hub2";
+        playerInv.setText("");
         gameTextArea.setText("You've entered into another part of the dungeon. In front of you are four more doors.");
         choice1.setText("Examine Door 5");
         choice2.setText("Examine Door 6");
@@ -835,6 +1185,7 @@ public class DungeonQuest {
         playerTurn = 0;
         playerTurnLabel.setText("Turn #: " + playerTurn);
         position = "deathReset2";
+        playerInv.setText("");
         turnTracker = 0;
         gameTextArea.setText("You awaken somewhere deep in the dungeon. In front of are four more doors.");
         choice1.setText("Examine Door 5");
@@ -930,8 +1281,8 @@ public class DungeonQuest {
         gameTextArea.setText("The worms seem to move north, then east, then north, then west");
         choice1.setText("Return");
         choice2.setText("");
-        choice2.setText("");
-        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
     }
     
     public void digDirt() {
@@ -948,8 +1299,8 @@ public class DungeonQuest {
             gameTextArea.setText("You attempt to dig out the dirt. Which direction should you go?");
             choice1.setText("North");
             choice2.setText("East");
-            choice2.setText("South");
-            choice3.setText("West");
+            choice3.setText("South");
+            choice4.setText("West");
         }
     }
     
@@ -1067,7 +1418,7 @@ public class DungeonQuest {
         position = "examineWindRoom";
         gameTextArea.setText("The room is small with a big gust pushing towards you. Scattered around the room are twigs and paper" +
                 " tied together with string.");
-        if (haveTwig == false && haveString == false) {
+        if (haveTwig == false && haveString == false && haveKite == false) {
             choice1.setText("Examine twigs");
             choice2.setText("Examine string and paper");
             choice3.setText("Wait");
@@ -1102,6 +1453,11 @@ public class DungeonQuest {
         position = "examineTwigs";
         gameTextArea.setText("Strong twigs that looks to be able to hold a decent weight. You pick them up.");
         haveTwig = true;
+        if (haveString == false) {
+            playerInv.setText("Twigs");
+        } else {
+            playerInv.setText("Twigs, String and paper");
+        }
         choice1.setText("Next");
         choice2.setText("");
         choice3.setText("");
@@ -1114,6 +1470,11 @@ public class DungeonQuest {
         position = "examineString";
         gameTextArea.setText("Strong twine tied to heavy duty paper. You pick them up.");
         haveString = true;
+        if (haveTwig == false){
+            playerInv.setText("String and paper");
+        } else {
+            playerInv.setText("Twigs, String and paper");
+        }
         choice1.setText("Next");
         choice2.setText("");
         choice3.setText("");
@@ -1126,6 +1487,9 @@ public class DungeonQuest {
         position = "combineTwigString";
         gameTextArea.setText("You tie the string around the twig. You've made a homemade kite!");
         haveKite = true;
+        playerInv.setText("Kite");
+        haveTwig = false;
+        haveString = false;
         choice1.setText("Next");
         choice2.setText("");
         choice3.setText("");
@@ -1181,6 +1545,18 @@ public class DungeonQuest {
         }
     }
     
+    public void flyUp2() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: " + playerTurn);
+        position = "flyUp2";
+        gameTextArea.setText("The kite lifts even higher into the room flipping the switch! You may now safely exit the room!");
+        windRoomComplete = true;
+        choice1.setText("Next");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    
     public void flyRight(){
         playerTurn++;
         playerTurnLabel.setText("Turn #: "+ playerTurn);
@@ -1222,6 +1598,7 @@ public class DungeonQuest {
             choice2.setText("Right");
             choice3.setText("Down");
             choice4.setText("Left");
+            flyLeft = true;
         } else if (flyLeft == true) {
             gameTextArea.setText("The kite catches a strong breeze slamming you into the wall! You blackout.");
             choice1.setText("Next");
@@ -1243,14 +1620,250 @@ public class DungeonQuest {
         
     }
     
-    public void door10HeatRoom(){
+    public void examineDoor7(){
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: "+ playerTurn);
+        position = "examineDoor7";
+        gameTextArea.setText("A small stone door covered in ash and burn marks.");
+        choice1.setText("Enter the room");
+        choice2.setText("Return");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    
+    public void door7HeatRoom(){
         // Room begins heating up tremendously, Maybe set turn a limit
         // intreact with wax on frying pan, combine wax with cloth, after reading book insulation
         // use fireproof cloth on door that is too hot to touch otherwise. (SUCCESSFUL PATH)
         // fail states, took too many turns only, combining cloth on frying pan burns the cloth, can grab more cloth,
         // not reading book before using wax melts wax too quickly, but can get more wax.
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: "+ playerTurn);
+        position = "door7HeatRoom";
+        gameTextArea.setText("You enter into a cramped room with a large stove that suddenly turns on and starts heating up.");
+        choice1.setText("Examine the room");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
     }
     
+    public void examineHeatRoom(){
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: "+ playerTurn);
+        position = "examineHeatRoom";
+        gameTextArea.setText("The room is small with plenty of trash laying about. There is a frying pan, wax tablets, cloth and a book" +
+                " on insulation nearby. The door to the exit is covered in thick wax.");
+        if (haveFryPan == false){
+            choice1.setText("Pickup frying pan");
+        } else if (haveFryPan == true) {
+            choice1.setText("Put pan on stove");
+        }
+        if (haveWax == false){
+            choice2.setText("pickup wax");
+        } else if (haveWax == true){
+            choice2.setText("Put wax on stove");
+        }
+        if (haveCloth == false) {
+            choice3.setText("pickup cloth");
+        } else if (haveCloth == true) {
+            choice3.setText("Put cloth on stove");
+        }
+        choice4.setText("Read the book");
+    }
+    
+    public void pickupFryPan(){
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: "+ playerTurn);
+        position = "pickupFryPan";
+        gameTextArea.setText("You pickup the pan.");
+        haveFryPan = true;
+        if (haveWax == false && haveCloth == false){
+            playerInv.setText("Fry Pan");
+        } else if (haveWax == true && haveCloth == false){
+            playerInv.setText("Fry Pan, Wax");
+        } else if (haveWax == false && haveCloth == true){
+            playerInv.setText("Fry Pan, Cloth");
+        } else if (haveWax == true && haveCloth == true){
+            playerInv.setText("Fry Pan, Wax, Cloth");
+        }
+        
+        choice1.setText("Return");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    
+    public void putPanStove() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: "+ playerTurn);
+        position = "putPanStove";
+        panStove = true;
+        haveFryPan = false;
+        gameTextArea.setText("You put the pan on the stove.");
+        choice1.setText("Return");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    public void pickupWax() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: "+ playerTurn);
+        position = "pickupWax";
+        gameTextArea.setText("You pickup the wax.");
+        haveWax = true;
+        if (haveFryPan == false && haveCloth == false){
+            playerInv.setText("Wax");
+        } else if (haveFryPan == true && haveCloth == false){
+            playerInv.setText("Fry Pan, Wax");
+        } else if (haveFryPan == false && haveCloth == true){
+            playerInv.setText("Wax, Cloth");
+        } else if (haveFryPan == true && haveCloth == true){
+            playerInv.setText("Fry Pan, Wax, Cloth");
+        }
+        
+        choice1.setText("Return");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    
+    public void putWaxStove() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: "+ playerTurn);
+        position = "putWaxStove";
+        haveWax = false;
+        if (panStove == false) {
+            gameTextArea.setText("The wax burns up on the hot stove into an unuseable mess.");
+            choice1.setText("Return");
+            choice2.setText("");
+            choice3.setText("");
+            choice4.setText("");
+        } else if (panStove == true && clothStove == false) {
+            gameTextArea.setText("The wax begins to melt on the pan.");
+            choice1.setText("Return");
+            choice2.setText("");
+            choice3.setText("");
+            choice4.setText("");
+            waxStove = true;
+        }
+    }
+    
+    public void pickupCloth() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: "+ playerTurn);
+        position = "pickupCloth";
+        gameTextArea.setText("You pickup the cloth");
+        haveCloth = true;
+        if (haveFryPan == false && haveWax == false){
+            playerInv.setText("Cloth");
+        } else if (haveFryPan == true && haveWax == false){
+            playerInv.setText("Fry Pan, Cloth");
+        } else if (haveFryPan == false && haveWax == true){
+            playerInv.setText("Wax, Cloth");
+        } else if (haveFryPan == true && haveWax == true){
+            playerInv.setText("Fry Pan, Wax, Cloth");
+        }
+        
+        choice1.setText("Return");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    
+    public void putClothStove() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: "+ playerTurn);
+        position = "putClothStove";
+        haveCloth = false;
+        if (panStove == false) {
+            gameTextArea.setText("The cloth burns up on the hot stove into an unuseable mess.");
+            choice1.setText("Return");
+            choice2.setText("");
+            choice3.setText("");
+            choice4.setText("");
+        } else if (panStove == true && waxStove == false) {
+            gameTextArea.setText("The cloth begins to burn on the pan. It becomes unuseable.");
+            choice1.setText("Return");
+            choice2.setText("");
+            choice3.setText("");
+            choice4.setText("");
+        } else if (panStove == true && waxStove == true) {
+            gameTextArea.setText("The cloth and wax combine into an insulated cloth!");
+            choice1.setText("Try the door");
+            choice2.setText("");
+            choice3.setText("");
+            choice4.setText("");
+        }
+    }
+    
+    public void readHeatBook() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: "+ playerTurn);
+        position = "readHeatBook";
+        gameTextArea.setText("The book suggests melted wax can become a good insulator if combined with something.");
+        choice1.setText("Return");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    
+    public void heatRoomFinish(){
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: "+ playerTurn);
+        position = "heatRoomFinish";
+        gameTextArea.setText("Using the insulated cloth you can now open the door!");
+        choice1.setText("Next");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+        heatRoomComplete = true;
+    }
+    
+    public void examineDoor8() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: "+ playerTurn);
+        position = "examineDoor8";
+        gameTextArea.setText("A door similar to that of a classroom.");
+        choice1.setText("Enter the room");
+        choice2.setText("Return");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    
+    public void door8Locked(){
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: "+ playerTurn);
+        position = "door8Locked";
+        gameTextArea.setText("This door remains locked shut. Try the other doors first.");
+        choice1.setText("Return");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    
+    public void door8() {
+        playerTurn++;
+        playerTurnLabel.setText("Turn #: "+ playerTurn);
+        position = "Door8";
+        gameTextArea.setText("You enter into a classroom. The professor asks a simple question." +
+                " 'What class section was this game developed in?'");
+        choice1.setText("CSI 1310");
+        choice2.setText("CSI 5280");
+        choice3.setText("CSI 2990");
+        choice4.setText("CSI 3660");
+    }
+    
+    public void gameComplete() {
+        position = "gameComplete";
+        playerTurnLabel.setText("Turn #: " + playerTurn);
+        gameTextArea.setText("You have bested our dungeon and completed your journey! Thank you so much for " +
+                "playing our game!");
+        choice1.setText("You");
+        choice2.setText("Have");
+        choice3.setText("Won");
+        choice4.setText("!!");
+    }
     public void door11ClockRoom(){
         // Elevator buttons floor 1,2,3,4 choices to go to each floor
         // can look out the elevator, clock changes on each floor,
@@ -1309,7 +1922,8 @@ public class DungeonQuest {
         
         @Override
         public void actionPerformed(ActionEvent event) {
-            //gameUI();
+            //TicTacToe();
+            gameUI();
         }
     }
     
@@ -1603,16 +2217,16 @@ public class DungeonQuest {
                 switch(choiceMade) {
                     case "choice1": examineDoor5(); break;
                     case "choice2": examineDoor6(); break;
-                    //case "choice3": examineDoor7(); break;
-                    //case "choice4": examineDoor8(); break;
+                    case "choice3": examineDoor7(); break;
+                    case "choice4": examineDoor8(); break;
                 }
                 break;
             case "deathReset2":
                 switch(choiceMade){
                     case "choice1": examineDoor5(); break;
                     case "choice2": examineDoor6(); break;
-                    //case "choice3": examineDoor7(); break;
-                    //case "choice4": examineDoor8(); break;
+                    case "choice3": examineDoor7(); break;
+                    case "choice4": examineDoor8(); break;
                 }
                 break;
             case "examineDoor5":
@@ -1705,9 +2319,9 @@ public class DungeonQuest {
                         case "choice4": digWest(); break;
                     }
                     break;
-                } else if (digEast == true){
+                } else if (digEast == true && digNorth == true){
                     switch(choiceMade){
-                        case "choice1": deathReset2(); break;
+                        case "choice1": digNorth(); break;
                     }
                     break;
                 }
@@ -1741,7 +2355,13 @@ public class DungeonQuest {
                 }
                 break;
             case "examineWindRoom":
-                if (haveTwig == false && haveString == false){
+                if (haveKite == true){
+                    switch(choiceMade){
+                        case "choice1": holdKite(); break;
+                        case "choice2": releaseKite(); break;
+                    }
+                    break;
+                } else if (haveTwig == false && haveString == false){
                     switch(choiceMade){
                         case "choice1": examineTwigs(); break;
                         case "choice2": examineString(); break;
@@ -1765,13 +2385,8 @@ public class DungeonQuest {
                         case "choice1": combineTwigString(); break;
                     }
                     break;
-                } else if (haveKite == true){
-                    switch(choiceMade){
-                        case "choice1": holdKite(); break;
-                        case "choice2": releaseKite(); break;
-                    }
-                    break;
                 }
+                break;
             case "examineTwigs":
                 switch(choiceMade){
                     case "choice1": examineWindRoom(); break;
@@ -1803,7 +2418,7 @@ public class DungeonQuest {
             case "flyUp":
                 if (flyUp == true) {
                     switch(choiceMade){
-                        case "choice1": hub2(); break;
+                        case "choice1": flyUp2(); break;
                     }
                     break;
                 } else if (flyLeft == true && flyRight == true){
@@ -1820,6 +2435,11 @@ public class DungeonQuest {
                     }
                     break;
                 }
+            case "flyUp2":
+                switch(choiceMade) {
+                    case "choice1": hub2(); break;
+                }
+                break;
             case "flyRight":
                 if (flyLeft == true && flyUp == false){
                     switch(choiceMade){
@@ -1852,13 +2472,147 @@ public class DungeonQuest {
                 } else if (flyLeft == true){
                     switch(choiceMade){
                         case "choice1": deathReset2(); break;
+                        case "choice2": flyRight(); break;
+                        case "choice3": deathReset2(); break;
+                        case "choice4": deathReset2(); break;
                     }
                     break;
+                }
+            case "examineDoor7":
+                switch(choiceMade){
+                    case "choice1": door7HeatRoom(); break;
+                    case "choice2": hub2(); break;
+                }
+                break;
+            case "door7HeatRoom":
+                switch(choiceMade){
+                    case "choice1": examineHeatRoom(); break;
+                }
+                break;
+            case "examineHeatRoom":
+                if (haveFryPan == false) {
+                    switch (choiceMade){
+                        case "choice1": pickupFryPan(); break;
+                    }
+                } else if (haveFryPan == true){
+                    switch (choiceMade) {
+                        case "choice1": putPanStove(); break;
+                    }
+                }
+                if (haveWax == false) {
+                    switch (choiceMade){
+                        case "choice2": pickupWax(); break;
+                    }
+                } else if (haveWax == true){
+                    switch (choiceMade){
+                        case "choice2": putWaxStove(); break;
+                    }
+                }
+                if (haveCloth == false){
+                    switch (choiceMade) {
+                        case "choice3": pickupCloth(); break;
+                    }
+                } else if (haveCloth == true){
+                    switch (choiceMade){
+                        case "choice3": putClothStove(); break;
+                    }
+                }
+                switch (choiceMade){
+                case "choice4": readHeatBook(); break; 
+                }
+                break;
+            case "pickupFryPan":
+                switch(choiceMade){
+                    case "choice1": examineHeatRoom(); break;
+                }
+                break;
+            case "putPanStove":
+                switch(choiceMade){
+                    case "choice1": examineHeatRoom(); break;
+                }
+                break;
+            case "pickupWax":
+                switch(choiceMade){
+                    case "choice1": examineHeatRoom(); break;
+                }
+                break;
+            case "putWaxStove":
+                if (panStove == false) {
+                    switch (choiceMade){
+                        case "choice1": examineHeatRoom(); break;
+                    }
+                } else if (panStove == true) {
+                    switch (choiceMade){
+                        case "choice1": examineHeatRoom(); break;
+                    }
+                }
+                break;
+            case "pickupCloth":
+                switch(choiceMade){
+                    case "choice1": examineHeatRoom(); break;
+                }
+                break;
+            case "putClothStove":
+                if (panStove == false) {
+                    switch (choiceMade){
+                        case "choice1": examineHeatRoom(); break;
+                    }
+                } else if (panStove == true && waxStove == false) {
+                    switch (choiceMade){
+                        case "choice1": examineHeatRoom(); break;
+                    }
+                } else if (panStove == true && waxStove == true) {
+                    switch (choiceMade){
+                        case "choice1": heatRoomFinish(); break;
+                    }
+                }
+                break;
+            case "readHeatBook":
+                switch (choiceMade){
+                    case "choice1": examineHeatRoom(); break;
+                }
+                break;
+            case "heatRoomFinish":
+                switch (choiceMade){
+                    case "choice1": hub2(); break;
+                }
+                break;
+            case "examineDoor8":
+                if (heatRoomComplete == false || digRoomComplete == false || windRoomComplete == false){
+                    switch (choiceMade) {
+                        case "choice1": door8Locked(); break;
+                    }
+                } else {
+                    switch (choiceMade){
+                        case "choice1": door8(); break;
+                    }
+                }
+                break;
+            case "door8Locked":
+                switch (choiceMade){
+                    case "choice1": hub2(); break;
+                }
+                break;
+            case "Door8":
+                switch (choiceMade){
+                    case "choice1": deathReset2(); break;
+                    case "choice2": deathReset2(); break;
+                    case "choice3": gameComplete(); break;
+                    case "choice4": deathReset2(); break;
+                }
+                break;
+            case "gameComplete":
+                switch(choiceMade){
+                    case "choice1": break;
+                    case "choice2": break;
+                    case "choice3": break;
+                    case "choice4": break;
                 }
             case "waitTurn":
                 switch(choiceMade){
                     case "choice1": break;
                 }
+                break;
             }
         }
     }

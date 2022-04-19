@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
@@ -96,12 +97,18 @@ public class DungeonQuest {
         startScreenBG = new JPanel();
         startScreenBG.setBounds(0,0,1280,720);
         startScreenBG.setLayout(null);
+        startScreenBG.setOpaque(true);
         startScreenBGLabel = new JLabel();
         startScreenBGLabel.setBounds(0,0,1280,720);
-        ImageIcon startScreenIMG = new ImageIcon(getClass().getClassLoader().getResource("Picture1.png"));
+        startScreenBGLabel.setOpaque(true);
+        startScreenBGLabel.setBackground(Color.BLACK);
+        ImageIcon startScreenIMG = new ImageIcon(getClass().getClassLoader().getResource("background4b.png"));
         startScreenBGLabel.setIcon(startScreenIMG);
         */
-
+        
+        ui.setContentPane(new JLabel(new ImageIcon("resources/background4b.png")));
+        ui.setBackground(Color.BLACK);
+        
         startScreen = new JPanel();
         startScreen.setBounds(350,175,600,200);
         startScreen.setBackground(Color.BLACK);
